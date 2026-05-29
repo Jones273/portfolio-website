@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Owino Brian Otieno | AI Portfolio</title>
+<title>Owino Brian Otieno | AI Researcher & Data Scientist</title>
 
 <style>
 
@@ -11,6 +11,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
 }
 
 html{
@@ -18,43 +19,23 @@ scroll-behavior:smooth;
 }
 
 body{
-font-family:'Segoe UI',sans-serif;
-background:#0f172a;
+background:#020617;
 color:#e2e8f0;
 line-height:1.7;
+overflow-x:hidden;
 }
 
-header{
-background:linear-gradient(135deg,#0f172a,#1e293b);
-padding:80px 20px;
-text-align:center;
-border-bottom:1px solid #334155;
-}
-
-.profile-img{
-width:280px;
-height:350px;
-border-radius:50%;
-object-fit:cover;
-border:4px solid #38bdf8;
-box-shadow:0 0 15px 40px rgba(0,0,0,.4);
-margin-bottom:25px;
-transition:0.4s;
-}
-
-.profile-img:hover{
-transform:translateY(-5px);
-}
-
-h1{
-font-size:3rem;
-margin-bottom:10px;
-}
-
-.subtitle{
-font-size:1.2rem;
-color:#38bdf8;
-margin-bottom:20px;
+body::before{
+content:'';
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top left,#0ea5e930,transparent 30%),
+radial-gradient(circle at bottom right,#38bdf830,transparent 30%);
+z-index:-1;
 }
 
 .container{
@@ -63,55 +44,157 @@ max-width:1200px;
 margin:auto;
 }
 
-section{
-background:#1e293b;
-margin:30px 0;
-padding:40px;
-border-radius:16px;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
-transition:0.3s;
+header{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:60px 20px;
 }
 
-section:hover{
+.hero{
+max-width:1000px;
+}
+
+.profile-img{
+width:320px;
+height:420px;
+object-fit:cover;
+object-position:center top;
+border-radius:24px;
+border:4px solid rgba(56,189,248,.4);
+box-shadow:
+0 20px 50px rgba(0,0,0,.5),
+0 0 40px rgba(56,189,248,.25);
+transition:.4s;
+}
+
+.profile-img:hover{
+transform:translateY(-10px) scale(1.02);
+}
+
+h1{
+font-size:4rem;
+margin-top:30px;
+margin-bottom:15px;
+}
+
+.subtitle{
+font-size:1.4rem;
+color:#38bdf8;
+margin-bottom:20px;
+}
+
+.hero-text{
+max-width:800px;
+margin:auto;
+font-size:1.1rem;
+color:#cbd5e1;
+}
+
+.button-group{
+margin-top:35px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
+}
+
+.btn{
+display:inline-block;
+padding:14px 28px;
+border-radius:12px;
+text-decoration:none;
+font-weight:600;
+background:#38bdf8;
+color:#0f172a;
+transition:.3s;
+}
+
+.btn:hover{
 transform:translateY(-5px);
+background:#7dd3fc;
+}
+
+.whatsapp{
+background:#25D366;
+color:white;
+}
+
+.whatsapp:hover{
+background:#1db954;
+}
+
+section{
+margin:50px auto;
+padding:40px;
+background:rgba(30,41,59,.8);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
 }
 
 h2{
 color:#38bdf8;
 margin-bottom:20px;
+font-size:2rem;
 }
 
 .skills{
 display:flex;
 flex-wrap:wrap;
-gap:10px;
+gap:12px;
 }
 
 .skills span{
 background:#334155;
-padding:10px 15px;
-border-radius:30px;
-transition:0.3s;
-cursor:pointer;
+padding:12px 18px;
+border-radius:50px;
+transition:.3s;
 }
 
 .skills span:hover{
 background:#38bdf8;
 color:#0f172a;
-transform:translateY(-3px);
+transform:translateY(-4px);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.stat{
+background:#334155;
+padding:25px;
+border-radius:18px;
+text-align:center;
+transition:.3s;
+}
+
+.stat:hover{
+transform:translateY(-8px);
+}
+
+.stat h3{
+font-size:2.5rem;
+color:#38bdf8;
 }
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 }
 
 .card{
 background:#334155;
-padding:20px;
-border-radius:12px;
-transition:0.3s;
+padding:25px;
+border-radius:18px;
+transition:.3s;
 }
 
 .card:hover{
@@ -119,113 +202,110 @@ transform:translateY(-8px);
 background:#475569;
 }
 
-.btn{
-display:inline-block;
-padding:12px 24px;
-margin:8px;
-background:#38bdf8;
-color:#0f172a;
-font-weight:bold;
-text-decoration:none;
-border-radius:8px;
-transition:0.3s;
-}
-
-.btn:hover{
-background:#7dd3fc;
-transform:translateY(-3px);
-}
-
-.stats{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-margin-top:20px;
-}
-
-.stat{
-flex:1;
-min-width:180px;
-background:#334155;
-padding:20px;
-border-radius:12px;
-text-align:center;
-}
-
-.stat h3{
-font-size:2rem;
+.card h3{
+margin-bottom:10px;
 color:#38bdf8;
+}
+
+.contact-info p{
+margin:10px 0;
 }
 
 footer{
-text-align:center;
 padding:40px;
+text-align:center;
 color:#94a3b8;
-}
-
-a{
-color:#38bdf8;
-text-decoration:none;
-}
-
-a:hover{
-text-decoration:underline;
 }
 
 @media(max-width:768px){
 
 h1{
-font-size:2rem;
+font-size:2.5rem;
 }
 
 .profile-img{
-width:140px;
-height:140px;
+width:250px;
+height:320px;
 }
 
-section{
-padding:25px;
+.subtitle{
+font-size:1.1rem;
+}
+
+.button-group{
+flex-direction:column;
+}
+
+.btn{
+width:100%;
 }
 
 }
 
 </style>
 </head>
-
 <body>
 
 <header>
 
-<img src="profile.png" alt="Brian" class="profile-img">
+<div class="hero">
+
+<img src="profile.png" alt="Owino Brian Otieno" class="profile-img">
 
 <h1>Owino Brian Otieno</h1>
 
 <p class="subtitle">
-Data Scientist • AI Specialist • Technical Writer
+Data Scientist • AI Specialist • Researcher • Technical Writer
 </p>
 
-<a href="https://github.com/Jones273" class="btn">GitHub</a>
+<p class="hero-text">
+Passionate about Artificial Intelligence, Data Science, Machine Learning,
+Cybersecurity, Research, Technical Writing and Software Development.
+I leverage technology and research to solve complex real-world challenges.
+</p>
 
-<a href="https://scholar.google.com/citations?hl=en&user=DVx7VjIAAAAJ" class="btn">
+<div class="button-group">
+
+<a href="https://github.com/Jones273" target="_blank" class="btn">
+GitHub
+</a>
+
+<a href="https://scholar.google.com/citations?hl=en&user=DVx7VjIAAAAJ" target="_blank" class="btn">
 Google Scholar
 </a>
+
+<a href="https://drive.google.com/drive/folders/1uELoHBUFWitnNdSxFGEYBu2ig7_BAbp6?usp=drive_link" target="_blank" class="btn">
+Research Archive
+</a>
+
+<a href="https://wa.me/254715721643" target="_blank" class="btn whatsapp">
+WhatsApp
+</a>
+
+</div>
+
+</div>
 
 </header>
 
 <div class="container">
 
 <section>
+
 <h2>About Me</h2>
 
 <p>
-I am a Data Scientist, AI Specialist, Technical Writer and Researcher with expertise in Machine Learning, Artificial Intelligence, Natural Language Processing, Cybersecurity, Data Analytics, Cloud Computing and Software Development. I am passionate about leveraging technology and research to solve complex real-world challenges.
+I am a multidisciplinary researcher and technology professional with expertise in
+Artificial Intelligence, Data Science, Machine Learning, Natural Language Processing,
+Cybersecurity, Cloud Computing and Technical Writing. My work combines academic
+research excellence with practical technology solutions aimed at creating measurable impact.
 </p>
 
 </section>
 
 <section>
 
-<h2>Skills</h2>
+<h2>Core Skills</h2>
 
 <div class="skills">
 
@@ -233,15 +313,18 @@ I am a Data Scientist, AI Specialist, Technical Writer and Researcher with exper
 <span>Machine Learning</span>
 <span>Deep Learning</span>
 <span>Artificial Intelligence</span>
-<span>Data Science</span>
 <span>NLP</span>
 <span>Cybersecurity</span>
+<span>Data Science</span>
 <span>SQL</span>
+<span>Cloud Computing</span>
 <span>AWS</span>
 <span>Azure</span>
 <span>Google Cloud</span>
 <span>Technical Writing</span>
 <span>Research</span>
+<span>Data Analytics</span>
+<span>Automation</span>
 
 </div>
 
@@ -257,7 +340,7 @@ I am a Data Scientist, AI Specialist, Technical Writer and Researcher with exper
 
 <p>BSc Analytical Chemistry with Computing</p>
 
-<p>First Class Honours</p>
+<p><strong>First Class Honours</strong></p>
 
 </div>
 
@@ -290,6 +373,25 @@ I am a Data Scientist, AI Specialist, Technical Writer and Researcher with exper
 
 <section>
 
+<h2>Research Repository</h2>
+
+<p>
+Explore my publications, datasets, technical reports,
+research materials and academic resources.
+</p>
+
+<br>
+
+<a href="https://drive.google.com/drive/folders/1uELoHBUFWitnNdSxFGEYBu2ig7_BAbp6?usp=drive_link"
+target="_blank"
+class="btn">
+Open Research Library
+</a>
+
+</section>
+
+<section>
+
 <h2>Certifications</h2>
 
 <div class="cards">
@@ -316,23 +418,50 @@ Advanced Machine Learning Specialization
 
 <section>
 
-<h2>Projects</h2>
+<h2>Featured Projects</h2>
 
 <div class="cards">
 
 <div class="card">
 <h3>AI Resume Analyzer</h3>
-<p>Coming Soon</p>
+<p>
+AI-powered resume screening and job matching system.
+</p>
 </div>
 
 <div class="card">
 <h3>Literature Review Assistant</h3>
-<p>Coming Soon</p>
+<p>
+Research synthesis and academic review automation platform.
+</p>
 </div>
 
 <div class="card">
 <h3>Cybersecurity Log Analyzer</h3>
-<p>Coming Soon</p>
+<p>
+Threat detection and security event analysis framework.
+</p>
+</div>
+
+<div class="card">
+<h3>NLP Research Assistant</h3>
+<p>
+Natural language processing tools for academic and business applications.
+</p>
+</div>
+
+<div class="card">
+<h3>Machine Learning Toolkit</h3>
+<p>
+Model development, evaluation and experimentation framework.
+</p>
+</div>
+
+<div class="card">
+<h3>Data Science Dashboard</h3>
+<p>
+Interactive analytics and visualization platform.
+</p>
 </div>
 
 </div>
@@ -341,13 +470,31 @@ Advanced Machine Learning Specialization
 
 <section>
 
-<h2>Contact</h2>
+<h2>Contact & Collaboration</h2>
+
+<div class="contact-info">
 
 <p><strong>Email:</strong> brianowino47@gmail.com</p>
 
-<p><strong>GitHub:</strong> github.com/Jones273</p>
+<p><strong>Kenya:</strong> +254 715 721 643</p>
 
-<p><strong>Google Scholar:</strong> scholar.google.com</p>
+<p><strong>United Kingdom:</strong> +44 7476 633563</p>
+
+</div>
+
+<br>
+
+<div class="button-group">
+
+<a href="https://wa.me/254715721643" class="btn whatsapp">
+Message on WhatsApp
+</a>
+
+<a href="https://github.com/Jones273" class="btn">
+GitHub Profile
+</a>
+
+</div>
 
 </section>
 
@@ -355,7 +502,7 @@ Advanced Machine Learning Specialization
 
 <footer>
 
-© 2026 Owino Brian Otieno | AI Portfolio
+© 2026 Owino Brian Otieno | AI Researcher • Data Scientist • Technical Writer
 
 </footer>
 
