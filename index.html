@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Owino Brian Otieno Work Portfolio</title>
+  <style>
+    :root {
+      --bg-main: #030712;
+      --bg-surface: #0b1329;
+      --bg-card: #111c44;
+      --accent-cyan: #00f2fe;
+      --accent-green: #10b981;
+      --accent-blue: #3b82f6;
+      --text-primary: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-color: rgba(0, 242, 254, 0.15);
+      --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Background Animation Elements */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .bubble-container {
+      position: fixed;
+      top: 0;
+      width: 100px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bubble-left { left: 0; }
+    .bubble-right { right: 0; }
+
+    .bubble {
+      position: absolute;
+      bottom: -20px;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.1), rgba(59, 130, 246, 0.05));
+      border: 1px solid rgba(0, 242, 254, 0.1);
+      border-radius: 50%;
+      animation: floatUp 12s infinite linear;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 0; }
+      10% { opacity: 0.4; }
+      90% { opacity: 0.2; }
+      100% { transform: translateY(-105vh) scale(1.2); opacity: 0; }
+    }
+
+    /* Fixed Horizontal Top Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(3, 7, 18, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 4%;
+    }
+
+    .nav-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-primary);
+      text-transform: uppercase;
+    }
+    .nav-title span { color: var(--accent-cyan); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.3s, border-color 0.3s;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    /* Layout Structure */
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 4% 60px;
+    }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Typography Reveal Effects */
+    .reveal-text {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .reveal-text.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 35px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 24px;
+      background: var(--accent-cyan);
+    }
+
+    /* Hero / Header Panel */
+    .hero-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 50px;
+      border-radius: 4px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      margin-bottom: 40px;
+    }
+
+    .hero-content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .hero-text-block {
+      flex: 1;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 15px;
+    }
+    .hero-title span { color: var(--accent-cyan); }
+
+    .hero-subtitle {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--accent-green);
+      margin-top: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* Advanced Profile Image Animation Rig */
+    .profile-avatar-container {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-avatar-container::before,
+    .profile-avatar-container::after {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border: 2px dashed var(--accent-cyan);
+      border-radius: 50%;
+      animation: cyberRotate 10s linear infinite;
+      pointer-events: none;
+    }
+
+    .profile-avatar-container::after {
+      inset: -18px;
+      border: 1.5px solid var(--accent-blue);
+      border-left-color: transparent;
+      border-right-color: transparent;
+      animation: cyberRotate 5s linear infinite reverse;
+      opacity: 0.6;
+    }
+
+    .profile-image-wrapper {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(0, 242, 254, 0.25);
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.2);
+      animation: cyberPulse 4s ease-in-out infinite alternate;
+      position: relative;
+      background: var(--bg-main);
+    }
+
+    .profile-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes cyberRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes cyberPulse {
+      0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 242, 254, 0.2), inset 0 0 10px rgba(0, 242, 254, 0.1); border-color: rgba(0, 242, 254, 0.25); }
+      100% { transform: scale(1.03); box-shadow: 0 0 40px rgba(0, 242, 254, 0.5), inset 0 0 20px rgba(0, 242, 254, 0.3); border-color: var(--accent-cyan); }
+    }
+
+    .typewriter-box {
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: var(--accent-green);
+      margin-bottom: 25px;
+      min-height: 24px;
+    }
+    .cursor {
+      animation: blink 0.8s infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-desc {
+      color: var(--text-muted);
+      max-width: 800px;
+      font-size: 1.05rem;
+      margin-bottom: 5px;
+    }
+
+    /* Global Context Strip */
+    .global-strip {
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      padding: 15px 25px;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .global-strip strong { color: var(--accent-green); }
+
+    /* Button Layouts */
+    .btn-row {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: var(--bg-main);
+      border: 1px solid var(--accent-cyan);
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* Matrix Data Grid Architecture */
+    .data-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    .data-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 4px;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--border-color);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 242, 254, 0.05);
+    }
+    .card-meta {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+    .card-body {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    /* Expertise Framework Table */
+    .framework-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    .framework-table th, .framework-table td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+    }
+    .framework-table th {
+      font-family: monospace;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .framework-table td strong {
+      color: var(--text-primary);
+    }
+    .framework-table tr:hover td {
+      background: rgba(0, 242, 254, 0.02);
+    }
+
+    /* Tags */
+    .tag-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      font-family: monospace;
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      border-radius: 2px;
+    }
+
+    /* Vault Security Strip */
+    .vault-strip {
+      background: rgba(59, 130, 246, 0.03);
+      border-left: 3px solid var(--accent-blue);
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 0 4px 4px 0;
+    }
+    .vault-strip p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .vault-strip strong { color: var(--text-primary); }
+
+    /* Communication Grid Elements */
+    .comm-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .comm-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .comm-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+    .comm-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-primary);
+    }
+    .comm-card:hover .comm-icon {
+      border-color: var(--accent-cyan);
+    }
+    .comm-card:hover .comm-icon svg {
+      fill: var(--accent-cyan);
+    }
+
+    /* Modals System */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.9);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: flex-start;
+      z-index: 2000;
+      padding: 60px 20px;
+      overflow-y: auto;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      width: 100%;
+      max-width: 850px;
+      padding: 45px;
+      border-radius: 4px;
+      position: relative;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    }
+    .modal-close {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--accent-cyan); }
+
+    .modal-section {
+      margin-bottom: 28px;
+    }
+    .modal-section h4 {
+      font-size: 0.9rem;
+      font-family: monospace;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+    .modal-list {
+      list-style: none;
+    }
+    .modal-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .modal-list li::before {
+      content: '↳';
+      position: absolute;
+      left: 0;
+      color: var(--accent-green);
+    }
+
+    /* Footer structure */
+    footer {
+      background: #02040a;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 10;
+    }
+    footer p { margin-bottom: 8px; }
+
+    /* Responsive Framework Adaptive Rules */
+    @media (max-width: 900px) {
+      .data-grid-2 { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.2rem; }
+      .hero-content-wrapper {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 35px;
+      }
+      .profile-avatar-container {
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-panel { padding: 30px 20px; }
+      .modal-box { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Graphics Engines -->
+  <canvas id="matrix-canvas"></canvas>
+  
+  <div class="bubble-container bubble-left" id="bubble-left"></div>
+  <div class="bubble-container bubble-right" id="bubble-right"></div>
+
+  <!-- Horizontal Top Nav Structure -->
+  <header>
+    <div class="nav-container">
+      <div class="nav-title">Portfolio<span>.</span></div>
+      <ul class="nav-links">
+        <li><a href="#about" class="active">About</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#academic">Academic Infrastructure</a></li>
+        <li><a href="#professional">Applied Systems</a></li>
+        <li><a href="#vault">Research Vault</a></li>
+        <li><a href="#contact">Communications</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Workspace Shell -->
+  <main>
+    
+    <!-- Hero Workspace Panel -->
+    <div class="hero-panel reveal-text">
+      <div class="hero-content-wrapper">
+        
+        <!-- Text Metric Layout Segment -->
+        <div class="hero-text-block">
+          <h1 class="hero-title">
+            Owino <span>Brian</span> Otieno
+            <span class="hero-subtitle">Work Portfolio</span>
+          </h1>
+          <div class="typewriter-box">
+            <span id="typewriter-target"></span><span class="cursor">|</span>
+          </div>
+          <p class="hero-desc">
+            Specialist in Artificial Intelligence frameworks, Machine Learning integration, and complex Data Science architectures. Intersecting advanced physical computing models with state-of-the-art security automation paradigms.
+          </p>
+        </div>
+
+        <!-- Animated Avatar Configuration Layout Segment -->
+        <div class="profile-avatar-container">
+          <div class="profile-image-wrapper">
+            <img src="profile.png" alt="Owino Brian Otieno">
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="global-strip">
+        <span>⚙️ <strong>Global Operational Scope:</strong> Deployed cross-border technical analytical solutions across USA, UK, UAE, AU, CA, Wales, Scotland, Africa, Europe, and Asia.</span>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="openModal('resume-modal')">Open Resume Summary</button>
+        <a href="mailto:brianowino47@gmail.com" class="btn btn-secondary">Initialize Direct Comm Link</a>
+      </div>
+    </div>
+
+    <!-- Section: Core Profiles -->
+    <section id="about" class="reveal-text">
+      <h2 class="section-title">Professional Profile</h2>
+      <div class="card" style="background: rgba(11, 19, 41, 0.45);">
+        <p style="font-size: 1.05rem; margin-bottom: 15px; color: var(--text-primary);">
+          Multidisciplinary Researcher and Systems Engineer coordinating predictive data processing networks and AI model evaluations.
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">
+          Maintains an established academic execution tracking over 93 global literature citations. Operates fluidly across dual computing sectors within Kenya and the United Kingdom, delivering rigorous structural analysis, Large Language Model validation frameworks, and security verification systems to enterprise stakeholders internationally.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section: Technical Expertise -->
+    <section id="expertise" class="reveal-text">
+      <h2 class="section-title">Technical Expertise</h2>
+      <div class="card" style="padding: 10px; overflow-x: auto;">
+        <table class="framework-table">
+          <thead>
+            <tr>
+              <th style="width: 30%;">Structural Domain</th>
+              <th>Core Technical Competencies & Technologies Implemented</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>AI & Machine Learning Frameworks</strong></td>
+              <td>TensorFlow, PyTorch, Scikit-learn, XGBoost, Large Language Models (LLMs), RLHF, Deep Learning, NLP pipelines, BERT transformers, LangChain frameworks</td>
+            </tr>
+            <tr>
+              <td><strong>Data Engineering & Analytics</strong></td>
+              <td>SQL (PostgreSQL, MySQL, BigQuery), Pandas, NumPy, Tableau, Power BI, R (ggplot2), Plotly, D3.js, Time Series modeling, statistical analysis frameworks</td>
+            </tr>
+            <tr>
+              <td><strong>Software Architecture</strong></td>
+              <td>Python, R, Java, C++, JavaScript, TypeScript, React, Node.js, Django, Flask, FastAPI execution microservices</td>
+            </tr>
+            <tr>
+              <td><strong>Cloud & Deployment Automation</strong></td>
+              <td>AWS (EC2, SageMaker pipelines), Google Cloud Platform, Microsoft Azure environments, Docker containers, Kubernetes cluster management</td>
+            </tr>
+            <tr>
+              <td><strong>Cybersecurity Operations</strong></td>
+              <td>Threat Detection modeling, SIEM configuration, Incident Response documentation, Penetration Testing matrix systems, Splunk analytics, Wireshark frame analysis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section: Academic Infrastructure -->
+    <section id="academic" class="reveal-text">
+      <h2 class="section-title">Academic Architecture & Research</h2>
+      <div class="data-grid-2">
+        <div class="card">
+          <div class="card-meta">Institutional Foundations</div>
+          <h3 class="card-title">BSc Analytical Chemistry with Computing</h3>
+          <p class="card-body">
+            University of Eldoret, Kenya. Attained First Class Honours (Graduation Class: 2023). Rigorous foundational synthesis directly merging computational physical models with core data structures.
+          </p>
+          <div class="tag-cluster">
+            <span class="tag">Computational Chemistry</span>
+            <span class="tag">Mathematical Modeling</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-meta">Peer-Reviewed Literature</div>
+          <h3 class="card-title">Dye Sensitized Solar Cells Evaluation</h3>
+          <p class="card-body">
+            Co-authored foundational research papers assessing the direct impacts of Anthocyanin pH adjustments and variations in concentration matrix systems on electron transport performance efficiency. Published in Heliyon (2021, 2022).
+          </p>
+          <div class="tag-cluster">
+            <span class="tag">Renewable Energy Matrix</span>
+            <span class="tag">Statistical Regressions</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Applied Work -->
+    <section id="professional" class="reveal-text">
+      <h2 class="section-title">Applied Engineering Systems</h2>
+      <div class="data-grid-3">
+        <div class="card">
+          <div class="card-meta">NLP Production System</div>
+          <h3 class="card-title">Transformer Resume Screener</h3>
+          <p class="card-body">
+            Engineered an isolated natural language parsing engine deploying semantic matching matrices to mathematically grade vector resumes against structural job constraints.
+          </p>
+          <div class="tag-cluster">
+            <span class="tag">spaCy</span>
+            <span class="tag">BERT</span>
+            <span class="tag">Streamlit</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-meta">Knowledge Retrieval Network</div>
+          <h3 class="card-title">RAG Academic Synthesis Engine</h3>
+          <p class="card-body">
+            Built an autonomous knowledge abstraction framework organizing document index parameters inside a localized vector database vectorization layout for auto-citation mapping.
+          </p>
+          <div class="tag-cluster">
+            <span class="tag">LangChain</span>
+            <span class="tag">FAISS</span>
+            <span class="tag">Context Extraction</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-meta">Security Telemetry Pipeline</div>
+          <h3 class="card-title">SIEM Threat Vector Tracker</h3>
+          <p class="card-body">
+            Integrated localized anomaly-isolation parameters into server transactional log processors using One-Class support vector engines to flag active threat vectors.
+          </p>
+          <div class="tag-cluster">
+            <span class="tag">Splunk Integration</span>
+            <span class="tag">SVM Anomaly Isolation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Secure Research Vault -->
+    <section id="vault" class="reveal-text">
+      <h2 class="section-title">Core Research Vault</h2>
+      
+      <div class="vault-strip">
+        <p>🔒 <strong>Access Control Policy Status:</strong> Materials categorized below reside inside restricted directories. <strong>For Google Drive access configurations, users must establish verified contact to obtain explicit secure permission.</strong></p>
+      </div>
+
+      <div class="data-grid-2">
+        <div class="card">
+          <div class="card-meta">Directory Archive: TA-01</div>
+          <h3 class="card-title">Primary Reference Literature</h3>
+          <p class="card-body">
+            • <em>Influence of the pH of Anthocyanins on the Efficiency of Dye Sensitized Solar Cells</em> (Heliyon, 2022)<br>
+            • <em>Influence of Concentration of Anthocyanins on Electron Transport in Dye Sensitized Solar Cells</em> (Heliyon, 2021)<br>
+            • <em>Evaluation of the Field Performance of ImmunoCard STAT Rapid Diagnostic Test for Rotavirus at Dadaab Refugee Camp</em>
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-meta">Directory Archive: TA-02</div>
+          <h3 class="card-title">Advanced Computing & Security Manifests</h3>
+          <p class="card-body">
+            • Modular Applied AI and ML Pipelines for Scaled Enterprise NLP Synthesis<br>
+            • Cybersecurity SIEM Network Traffic Event Detection & Logging Metrics<br>
+            • Advanced Postgraduate Academic Thesis & Specialized Research Syntheses
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Communications Matrix -->
+    <section id="contact" class="reveal-text">
+      <h2 class="section-title">Secure Communications Matrix</h2>
+      <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem;">
+        Select an active channel token to query validation arrays or request asset access maps.
+      </p>
+
+      <div class="data-grid-3">
+        <!-- Direct Email Token -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">Direct Email Endpoint</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Primary routing interface for enterprise project scopes and Google Drive encryption handshakes.</p>
+          </div>
+          <a href="mailto:brianowino47@gmail.com" class="btn btn-secondary" style="font-size: 0.75rem; padding: 8px 12px; text-align:center;">Initialize Channel</a>
+        </div>
+
+        <!-- Google Chat Endpoint -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">Google Chat Gateway</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Secure real-time diagnostic chat array bound directly to the verified primary email node.</p>
+          </div>
+          <a href="mailto:brianowino47@gmail.com" class="btn btn-secondary" style="font-size: 0.75rem; padding: 8px 12px; text-align:center;">Route via Chat</a>
+        </div>
+
+        <!-- WhatsApp Network Array (No explicit strings displayed) -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">WhatsApp Messaging Array</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Encrypted immediate validation link tokens mapped dynamically by geographical region keys.</p>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <a href="https://wa.me/254715721643" target="_blank" class="btn btn-secondary" style="font-size: 0.7rem; padding: 8px 4px; text-align:center;">Token: KE</a>
+            <a href="https://wa.me/447476633563" target="_blank" class="btn btn-secondary" style="font-size: 0.7rem; padding: 8px 4px; text-align:center;">Token: UK</a>
+          </div>
+        </div>
+
+        <!-- WeChat Identity -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">WeChat Core Identity</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Direct tracking authentication key inside the secure mobile architecture layers.</p>
+            <p style="font-family: monospace; font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 15px;">ID: Tutor_Xerxes</p>
+          </div>
+          <div class="tag" style="text-align: center; border-color: rgba(0, 242, 254, 0.2); padding: 8px;">Synchronous Node Active</div>
+        </div>
+
+        <!-- Superprof Terminal -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">Superprof Index Array</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Authorized transmission link managing pedagogical coordination and algorithmic mentorship.</p>
+          </div>
+          <a href="https://www.superprof.com/ir/42916626-5bed2f" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 8px 12px; text-align:center;">Access Registry</a>
+        </div>
+
+        <!-- Global Citation Array Index -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">Google Scholar Platform</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Monitored indexing node logging real-time citations, index metrics, and verified tracking maps.</p>
+          </div>
+          <a href="https://scholar.google.com/citations?hl=en&user=DVx7VjIAAAAJ" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 8px 12px; text-align:center;">Verify Metrics</a>
+        </div>
+
+        <!-- X Media Node -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">X Communications Interface</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Dynamic broadcast stream tracking development logs, code drops, and general analytical commentary.</p>
+          </div>
+          <a href="https://x.com/BrianXerxes12" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 8px 12px; text-align:center;">Connect Interface</a>
+        </div>
+
+        <!-- Facebook Profiling Directory -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">Facebook Reference Node</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Supplementary validation index routing profile path for extended community authentication.</p>
+          </div>
+          <a href="https://www.facebook.com/share/1BDnFxPdGK/" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 8px 12px; text-align:center;">Query Profile</a>
+        </div>
+
+        <!-- Core Repository Grid -->
+        <div class="card comm-card">
+          <div>
+            <div class="comm-header">
+              <div class="comm-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+              </div>
+              <h4 style="font-size: 0.95rem; font-weight: 700;">GitHub Code Engine</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px;">Primary operational infrastructure hosting model source files, automation trees, and system logic libraries.</p>
+          </div>
+          <a href="https://github.com/Jones273" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 8px 12px; text-align:center;">Explore Source</a>
+        </div>
+      </div>
+
+      <div style="margin-top: 35px; text-align: center;">
+        <a href="mailto:brianowino47@gmail.com?subject=Strategic%20Engagement%20Request" class="btn btn-primary" style="padding: 15px 40px; font-size: 0.9rem;">Initialize Direct Engagement Connection Matrix</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Section: Footer Architecture -->
+  <footer>
+    <p>&copy; 2026 Owino Brian Otieno. All Rights Reserved.</p>
+    <p style="opacity: 0.5; font-family: monospace;">Classification: Technical Portfolio // Verification Array: Active</p>
+  </footer>
+
+  <!-- Modal Structural Architecture: Profile Summary View -->
+  <div class="modal-overlay" id="resume-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('resume-modal')">✕</button>
+      <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 25px; text-transform: uppercase;">Professional Resume Matrix Summary</h3>
+      
+      <div class="modal-section">
+        <h4>Operational Scope Profile</h4>
+        <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+          Highly technical professional with over 4 years of continuous application within technical analytics, artificial intelligence specialized structures, and architectural enterprise writing. Extensive history managing critical verification milestones, coordinating complex stakeholder development operations, and deploying data extraction pipelines across multiple complex target sectors.
+        </p>
+      </div>
+
+      <div class="modal-section">
+        <h4>Core Architectural Expertise</h4>
+        <ul class="modal-list">
+          <li>Advanced model preparation, tuning pipelines, and hyperparameter alignment (RLHF, SFT logic trees).</li>
+          <li>Comprehensive systematic writing and documentation synthesis for diverse scientific audiences.</li>
+          <li>Full-stack data collection arrays, automated metric pipelines, and cloud systems management.</li>
+          <li>Cybersecurity monitoring, trace identification algorithms, and compliance risk structural testing.</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <h4>Chronological Sequence Metrics</h4>
+        <ul class="modal-list">
+          <li><strong>Independent Technical Consultant & Systems Analyst (2022 - Present):</strong> Deploys customized ML assets, executes validation matrices, and orchestrates target pipelines for complex datasets globally.</li>
+          <li><strong>AI Training & Dataset Optimization Engineer (2024 - 2025):</strong> Engineered precision data taxonomies, aligned multimodal target vectors, and managed adversarial validation arrays.</li>
+          <li><strong>Physical Systems Computational Researcher (2021 - 2023):</strong> Synthesized novel physical modeling calculations, generating verified scientific data and contributing to peer-reviewed publication indexes.</li>
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <h4>Academic Verification & Accreditations</h4>
+        <ul class="modal-list">
+          <li>BSc in Analytical Chemistry with Computing — University of Eldoret (First Class Honours, 2023)</li>
+          <li>IBM Cybersecurity Analyst Professional Certification (Advanced 8-Course Track, 2025)</li>
+          <li>Advanced Machine Learning & Neural Network Synthesis Certifications (DeepLearning.AI / Coursera)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Interaction & Rendering Matrix Logic -->
+  <script>
+    // --- Background Matrix Code Rain Animation Engine ---
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const chars = "0101010101ABCDEFGHJKLMNOPQRSTUVWXYZ#@$&%+*";
+    const charArr = chars.split("");
+    const fontSize = 14;
+    let columns = canvas.width / fontSize;
+    let drops = Array(Math.floor(columns)).fill(1);
+
+    window.addEventListener('resize', () => {
+      columns = canvas.width / fontSize;
+      drops = Array(Math.floor(columns)).fill(1);
+    });
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(3, 7, 18, 0.04)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00f2fe';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = charArr[Math.floor(Math.random() * charArr.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 33);
+
+    // --- Dynamic Side Peripheral Bubbles Animation Generator ---
+    function spawnBubbles(containerId) {
+      const container = document.getElementById(containerId);
+      const width = container.offsetWidth;
+      
+      setInterval(() => {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        
+        const size = Math.random() * 24 + 8; // Size range: 8px to 32px
+        const leftPos = Math.random() * width;
+        const duration = Math.random() * 6 + 8; // Speed range: 8s to 14s
+        
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${leftPos}px`;
+        bubble.style.animationDuration = `${duration}s`;
+        
+        container.appendChild(bubble);
+        
+        setTimeout(() => {
+          bubble.remove();
+        }, duration * 1000);
+      }, 1400);
+    }
+    spawnBubbles('bubble-left');
+    spawnBubbles('bubble-right');
+
+    // --- Typographic Reveal Animations On Scroll (Intersection Observer) ---
+    const revealElements = document.querySelectorAll('.reveal-text');
+    const observerOptions = { threshold: 0.05, rootMargin: "0px 0px -40px 0px" };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // --- Precise Dynamic Top Navbar Active State Synchronization ---
+    const sections = document.querySelectorAll('section, .hero-panel');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let currentSectionId = 'about';
+      sections.forEach(sec => {
+        const top = window.scrollY;
+        const offset = sec.offsetTop - 160;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        
+        if (id && top >= offset && top < offset + height) {
+          currentSectionId = id;
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSectionId}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // --- Textual Typewriter Framework Sequence Engine ---
+    const typewriterPhrases = [
+      "SYSTEM STATE: AI SPECIALIST NODE RUNNING",
+      "SYSTEM STATE: DATA SCIENTIST ARCHITECTURE ONLINE",
+      "SYSTEM STATE: TECHNICAL ACADEMIC WRITER VERIFIED",
+      "SYSTEM STATE: CYBERSECURITY ANALYST DEPLOYED"
+    ];
+    let phraseIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    const targetElement = document.getElementById('typewriter-target');
+
+    function executeTypewriterCycle() {
+      const currentText = typewriterPhrases[phraseIdx];
+      
+      if (isDeleting) {
+        charIdx--;
+      } else {
+        charIdx++;
+      }
+
+      targetElement.textContent = currentText.substring(0, charIdx);
+
+      let dynamicallyAdjustedSpeed = isDeleting ? 30 : 65;
+
+      if (!isDeleting && charIdx === currentText.length) {
+        dynamicallyAdjustedSpeed = 2500; // Freeze string block when full
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        phraseIdx = (phraseIdx + 1) % typewriterPhrases.length;
+        dynamicallyAdjustedSpeed = 400; // Shift block latency delay
+      }
+
+      setTimeout(executeTypewriterCycle, dynamicallyAdjustedSpeed);
+    }
+    setTimeout(executeTypewriterCycle, 600);
+
+    // --- Modal Interface Handlers ---
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Modal background close click handler
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeModal(this.id);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
