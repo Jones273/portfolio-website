@@ -20,7 +20,7 @@ Data Scientist | AI Specialist | Technical Writer
 - Academic Writing Assistant
 
 ## Research
-Google Scholar: [link]
+Google Scholar: https://scholar.google.com/citations?user=DVx7VjIAAAAJ&hl=en
 
 ## Contact
 Email: brianowino47@gmail.com
