@@ -2,7 +2,7 @@
 Personal portfolio website showcasing my work in AI, Data Science, Machine Learning, Cybersecurity, Research, and Software Development.
 # Owino Brian Otieno
 
-Data Scientist | AI Specialist | Technical Writer
+Programmer | Data Scientist | AI Specialist | Technical Writer
 
 ## Skills
 - Python
