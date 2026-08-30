@@ -448,7 +448,7 @@ portfolio-website/
 1. Repository must be public on GitHub
 2. Navigate to Settings > Pages
 3. Select main branch as source
-4. Website will be accessible at: https://owino-brian.github.io/portfolio-website
+4. Website accessible at: https://owino-brian.github.io/portfolio-website
 
 **Custom Domain:**
 - Update DNS records to point to GitHub Pages servers
