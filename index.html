@@ -299,27 +299,60 @@
       border: 1px solid var(--accent-teal);
     }
 
-    .skill-category {
-      margin-bottom: 2rem;
+    .expertise-category {
+      margin-bottom: 3rem;
+      background: var(--secondary-dark);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 2rem;
     }
 
-    .skill-category h4 {
+    .expertise-category h3 {
       color: var(--accent-teal);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .expertise-item {
+      margin-bottom: 1.75rem;
+    }
+
+    .expertise-item h4 {
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .expertise-item p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
       margin-bottom: 0.75rem;
     }
 
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
+    .expertise-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1rem;
     }
 
-    .skill-item {
-      background: var(--secondary-dark);
-      padding: 0.75rem 1.25rem;
-      border-radius: 4px;
-      border: 1px solid var(--border-light);
+    .expertise-list li {
+      padding: 0.4rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--text-secondary);
       font-size: 0.95rem;
+    }
+
+    .expertise-list li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+      font-weight: bold;
     }
 
     .service-box {
@@ -354,40 +387,6 @@
       left: 0;
       color: var(--accent-teal);
       font-weight: bold;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1.5rem;
-      background: var(--secondary-dark);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    table thead {
-      background: rgba(20, 184, 166, 0.1);
-      border-bottom: 2px solid var(--border-light);
-    }
-
-    table th {
-      padding: 1rem;
-      text-align: left;
-      font-weight: 600;
-      color: var(--accent-teal);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    table td {
-      padding: 1rem;
-      border-bottom: 1px solid var(--border-light);
-      color: var(--text-secondary);
-    }
-
-    table tr:hover {
-      background: rgba(20, 184, 166, 0.05);
     }
 
     .contact-section {
@@ -557,7 +556,7 @@
         <div>
           <h3>Background</h3>
           <p>I hold a Bachelor of Science in Analytical Chemistry with Computing from the University of Eldoret, graduating with First Class Honours in 2023. My academic training combined computational methods with experimental physical chemistry, establishing a foundation for rigorous technical problem-solving and data-driven decision making.</p>
-          <p>Over the past four years, I have worked as an independent technical consultant, AI systems developer, and research specialist, delivering solutions across software development, data engineering, machine learning, and academic research support.</p>
+          <p>Over the past four years, I have worked as an independent technical consultant, AI systems developer, and research specialist, delivering solutions across software development, data engineering, machine learning, and academic research support for international clients across UK, USA, Australia, Canada, UAE, India, and China.</p>
         </div>
         <div>
           <div class="credentials">
@@ -579,63 +578,250 @@
     <section id="expertise">
       <h2>Technical Expertise</h2>
       
-      <div class="skill-category">
-        <h4>Programming Languages and Frameworks</h4>
-        <div class="skill-list">
-          <div class="skill-item">Python (Django, Flask, FastAPI, Pandas, NumPy)</div>
-          <div class="skill-item">JavaScript/TypeScript (React, Node.js, Express)</div>
-          <div class="skill-item">Java (Swing, AWT, Graphics2D)</div>
-          <div class="skill-item">C and C++</div>
-          <div class="skill-item">SQL (PostgreSQL, MySQL, BigQuery)</div>
-          <div class="skill-item">HTML/CSS</div>
+      <!-- Backend and Web Development -->
+      <div class="expertise-category">
+        <h3>Backend Development and Web Services</h3>
+        
+        <div class="expertise-item">
+          <h4>Python Development and Backend Systems</h4>
+          <p>Built and deployed production Python applications for international clients across multiple sectors. Completed large-scale projects handling enterprise data processing and real-time analytics.</p>
+          <ul class="expertise-list">
+            <li>Data processing pipelines handling 5M+ records daily for analytics platforms</li>
+            <li>RESTful API development using Flask, FastAPI, and Django frameworks</li>
+            <li>Real-time ETL workflows with error handling and monitoring</li>
+            <li>Streamlit applications for interactive data analysis and reporting dashboards</li>
+            <li>AWS and GCP cloud integration for scalable deployments</li>
+            <li>Database optimization and query performance tuning (PostgreSQL, MySQL)</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>JavaScript/TypeScript and Full-Stack Development</h4>
+          <p>Developed modern web applications serving multiple regions. Experience building responsive frontends and scalable backend services.</p>
+          <ul class="expertise-list">
+            <li>React single-page application development with state management</li>
+            <li>Node.js backend services with Express.js framework</li>
+            <li>Real-time data visualization dashboards (Recharts, D3.js, Three.js)</li>
+            <li>REST API consumption and integration</li>
+            <li>TypeScript for type-safe application development</li>
+            <li>Deployment to Vercel, Netlify, and cloud platforms</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Java, C, and C++ Systems Programming</h4>
+          <p>Developed complex systems spanning 3D graphics, game engines, and console applications. Demonstrated expertise in object-oriented design and low-level optimization.</p>
+          <ul class="expertise-list">
+            <li>Java 3D rendering pipeline with custom mathematics libraries</li>
+            <li>Real-time graphics rendering in Swing/AWT frameworks</li>
+            <li>C console applications with custom 3D projection systems</li>
+            <li>C++ object-oriented architecture with smart pointers and modern practices</li>
+            <li>Game development with physics engines and collision detection</li>
+            <li>Performance optimization and multithreading</li>
+          </ul>
         </div>
       </div>
 
-      <div class="skill-category">
-        <h4>Data Engineering and Analysis</h4>
-        <div class="skill-list">
-          <div class="skill-item">ETL Pipeline Development</div>
-          <div class="skill-item">Data Cleaning and Transformation</div>
-          <div class="skill-item">Statistical Analysis</div>
-          <div class="skill-item">Data Visualization (Tableau, Power BI, D3.js)</div>
-          <div class="skill-item">Time Series Modeling</div>
-          <div class="skill-item">Database Architecture</div>
+      <!-- Data Engineering -->
+      <div class="expertise-category">
+        <h3>Data Engineering and Analytics</h3>
+        
+        <div class="expertise-item">
+          <h4>ETL Pipeline Development and Data Processing</h4>
+          <p>Designed and implemented data pipelines for clients processing diverse data formats and scales. Expertise in data transformation, validation, and quality assurance.</p>
+          <ul class="expertise-list">
+            <li>Automated ETL workflows using Python and SQL</li>
+            <li>Data extraction from multiple sources (APIs, databases, file systems)</li>
+            <li>Data cleaning and normalization for analytics readiness</li>
+            <li>Duplicate detection and removal at scale</li>
+            <li>Scheduling and monitoring using cloud services</li>
+            <li>Data quality metrics and validation frameworks</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Data Analysis and Statistical Modeling</h4>
+          <p>Completed data analysis projects providing actionable insights for decision-making. Strong foundation in statistical methods and hypothesis testing.</p>
+          <ul class="expertise-list">
+            <li>Exploratory data analysis and descriptive statistics</li>
+            <li>Statistical hypothesis testing and regression analysis</li>
+            <li>Time series analysis and forecasting models</li>
+            <li>Correlation and causality analysis</li>
+            <li>Report generation with interpretation and recommendations</li>
+            <li>Tools: Pandas, NumPy, SciPy, R</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Data Visualization and Dashboard Development</h4>
+          <p>Created interactive dashboards and visualizations for international clients to monitor KPIs and make data-driven decisions.</p>
+          <ul class="expertise-list">
+            <li>Interactive dashboard development (Streamlit, Tableau)</li>
+            <li>Custom visualizations with Plotly, D3.js, and Recharts</li>
+            <li>Real-time data monitoring and alerts</li>
+            <li>Business intelligence platform integration</li>
+            <li>Performance analytics and metric tracking</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Database Design and Optimization</h4>
+          <p>Architected and optimized database systems for performance and scalability across multiple projects.</p>
+          <ul class="expertise-list">
+            <li>Relational database design and normalization</li>
+            <li>Query optimization and index strategies</li>
+            <li>Database performance tuning and profiling</li>
+            <li>PostgreSQL, MySQL, SQLite implementation and administration</li>
+            <li>BigQuery for large-scale analytics</li>
+            <li>Backup and disaster recovery strategies</li>
+          </ul>
         </div>
       </div>
 
-      <div class="skill-category">
-        <h4>Artificial Intelligence and Machine Learning</h4>
-        <div class="skill-list">
-          <div class="skill-item">Model Development and Training</div>
-          <div class="skill-item">Natural Language Processing</div>
-          <div class="skill-item">Neural Network Architecture</div>
-          <div class="skill-item">LLM Integration and Fine-tuning</div>
-          <div class="skill-item">Retrieval-Augmented Generation (RAG)</div>
-          <div class="skill-item">Model Evaluation and Optimization</div>
+      <!-- Artificial Intelligence and Machine Learning -->
+      <div class="expertise-category">
+        <h3>Artificial Intelligence and Machine Learning</h3>
+        
+        <div class="expertise-item">
+          <h4>Machine Learning Model Development</h4>
+          <p>Developed and deployed machine learning models for predictive analytics, classification, and pattern recognition across client projects.</p>
+          <ul class="expertise-list">
+            <li>Supervised learning models (regression, classification)</li>
+            <li>Unsupervised learning (clustering, dimensionality reduction)</li>
+            <li>Model training, validation, and hyperparameter tuning</li>
+            <li>Cross-validation and performance metrics</li>
+            <li>Scikit-learn, XGBoost, and ensemble methods</li>
+            <li>Model deployment and serving in production environments</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Natural Language Processing</h4>
+          <p>Built NLP systems for text processing, semantic analysis, and information extraction for various applications.</p>
+          <ul class="expertise-list">
+            <li>Text preprocessing and tokenization</li>
+            <li>Sentiment analysis and text classification</li>
+            <li>Named entity recognition and information extraction</li>
+            <li>Document similarity and semantic matching</li>
+            <li>spaCy, NLTK, and transformer-based models</li>
+            <li>Vector embeddings and semantic search</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Large Language Model Integration</h4>
+          <p>Implemented AI-powered applications integrating LLMs for diverse use cases. Experience with prompt engineering and system design.</p>
+          <ul class="expertise-list">
+            <li>LLM API integration and orchestration</li>
+            <li>Prompt engineering and optimization</li>
+            <li>Retrieval-Augmented Generation (RAG) systems</li>
+            <li>Conversational AI and chatbot development</li>
+            <li>Vector databases (FAISS, Pinecone)</li>
+            <li>Production deployment with monitoring and reliability</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Deep Learning and Neural Networks</h4>
+          <p>Developed neural network architectures for image processing, sequence modeling, and complex pattern recognition.</p>
+          <ul class="expertise-list">
+            <li>Convolutional neural networks for image analysis</li>
+            <li>Recurrent neural networks and transformers</li>
+            <li>TensorFlow and PyTorch implementation</li>
+            <li>Transfer learning and fine-tuning</li>
+            <li>Model evaluation and interpretation</li>
+            <li>GPU optimization and distributed training</li>
+          </ul>
         </div>
       </div>
 
-      <div class="skill-category">
-        <h4>Cloud and DevOps</h4>
-        <div class="skill-list">
-          <div class="skill-item">AWS Services (EC2, SageMaker, Lambda)</div>
-          <div class="skill-item">Google Cloud Platform</div>
-          <div class="skill-item">Docker and Kubernetes</div>
-          <div class="skill-item">CI/CD Pipeline Configuration</div>
-          <div class="skill-item">Deployment Automation</div>
+      <!-- Cloud and DevOps -->
+      <div class="expertise-category">
+        <h3>Cloud Infrastructure and DevOps</h3>
+        
+        <div class="expertise-item">
+          <h4>Cloud Platform Services</h4>
+          <p>Deployed and managed applications on major cloud platforms for international clients requiring scalability and reliability.</p>
+          <ul class="expertise-list">
+            <li>AWS services (EC2, S3, RDS, Lambda, SageMaker)</li>
+            <li>Google Cloud Platform (Compute Engine, BigQuery, Cloud Functions)</li>
+            <li>Microsoft Azure services and virtual machines</li>
+            <li>Managed database services and data warehousing</li>
+            <li>Auto-scaling and load balancing configuration</li>
+            <li>Cost optimization and resource management</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Containerization and Orchestration</h4>
+          <p>Containerized applications for consistent deployment across environments and orchestrated complex microservice architectures.</p>
+          <ul class="expertise-list">
+            <li>Docker image creation and optimization</li>
+            <li>Docker Compose for multi-container applications</li>
+            <li>Kubernetes cluster setup and management</li>
+            <li>Service deployment and scaling</li>
+            <li>Container registry management</li>
+            <li>Persistent storage and volume management</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>CI/CD Pipelines and Automation</h4>
+          <p>Established automated deployment pipelines enabling rapid, reliable releases for client applications.</p>
+          <ul class="expertise-list">
+            <li>GitHub Actions workflow configuration</li>
+            <li>GitLab CI/CD pipeline setup</li>
+            <li>Automated testing integration</li>
+            <li>Build automation and artifact management</li>
+            <li>Deployment strategies (blue-green, canary)</li>
+            <li>Monitoring and rollback procedures</li>
+          </ul>
         </div>
       </div>
 
-      <div class="skill-category">
-        <h4>Additional Competencies</h4>
-        <div class="skill-list">
-          <div class="skill-item">Systems Architecture</div>
-          <div class="skill-item">3D Graphics and Game Development</div>
-          <div class="skill-item">Web Application Development</div>
-          <div class="skill-item">Software Documentation</div>
-          <div class="skill-item">Security and Cybersecurity Fundamentals</div>
+      <!-- Technical Writing and Documentation -->
+      <div class="expertise-category">
+        <h3>Additional Technical Competencies</h3>
+        
+        <div class="expertise-item">
+          <h4>Systems Architecture and Design</h4>
+          <p>Designed scalable, maintainable system architectures for complex applications serving international clients.</p>
+          <ul class="expertise-list">
+            <li>Microservices architecture design</li>
+            <li>System component interaction and integration</li>
+            <li>Scalability and performance optimization</li>
+            <li>Security architecture and best practices</li>
+            <li>Technology stack selection and justification</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>3D Graphics and Game Development</h4>
+          <p>Developed sophisticated graphics applications and game systems with custom rendering pipelines and physics engines.</p>
+          <ul class="expertise-list">
+            <li>3D mathematics and transformation matrices</li>
+            <li>Custom rendering pipelines and graphics programming</li>
+            <li>Physics engines and collision detection</li>
+            <li>Particle systems and visual effects</li>
+            <li>Game state management and controls</li>
+            <li>Performance optimization for real-time applications</li>
+          </ul>
+        </div>
+
+        <div class="expertise-item">
+          <h4>Security and Cybersecurity Fundamentals</h4>
+          <p>Implemented security best practices and protocols across client applications and data systems.</p>
+          <ul class="expertise-list">
+            <li>Input validation and injection prevention</li>
+            <li>Authentication and authorization systems</li>
+            <li>Encryption and secure data handling</li>
+            <li>OWASP principles and secure coding</li>
+            <li>Threat detection and anomaly identification</li>
+            <li>Security audit and compliance</li>
+          </ul>
         </div>
       </div>
+
     </section>
 
     <!-- Services Section -->
